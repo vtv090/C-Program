@@ -1,4 +1,4 @@
-# C-Program
+# C Program
 Linux (here: Ubuntu)
 
 +) gcc is part of the build-essential package
