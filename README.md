@@ -15,3 +15,5 @@ Extract the zip file, go to directory prog1lib/lib, make libprog1.a, go to direc
 -> unzip prog1lib-1.4.zip 
 
 -> cd prog1lib/lib -> make
+
+Linkedlist: This file shows how we with Linked List work
