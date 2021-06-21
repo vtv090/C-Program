@@ -17,7 +17,7 @@ Intlist* prepend(int value, Intlist* list){
 	node->next = list;
 	return node;
 }
-
+//find middle of list: if have no middle list, return 0, else return that value
 int center_or_zero(Intlist* list){
 	
 	int length = 0;
@@ -48,6 +48,7 @@ void test_center_or_zero() {
     test_equal_i(center_or_zero(prepend(6, prepend(8, prepend(-3, prepend(-4, NULL))))), 0);
 }
 
+//find number of elements befor changing from positiv number to negativ number
 int find_neighbour(Intlist* list){
 	int count  = 0;
 	int length = 0;
@@ -87,6 +88,7 @@ void test_find_neighbour(){
     test_equal_i(find_neighbour(NULL), 0);
 }
 
+//count number of change from  "+  to -" or "- to +"
 int number_of_change(Intlist* list){
 	int count = 0;
 	int length = 0;
@@ -114,6 +116,7 @@ void test_number_of_change(){
      test_equal_i(number_of_change(prepend(5, NULL)), 0); 
 }
 
+//number of struct like "+ - +" or "- + -" in linked list
 int number_of_struct(Intlist* list){
 	int count = 0;
 	int length = 0;
@@ -158,6 +161,7 @@ int maxint(int a, int b){
 		return a;
 	}
 }
+
 int find_max_subElements(Intlist* list){
 	int temp_max = INT_MIN;
 	int max = INT_MIN;
@@ -217,7 +221,7 @@ int find_smallest_inList(Intlist* list){
 		min = minint(min, node->value); //compare to another elements
 	}
 	return min;
-}
+}https://github.com/vtv090/C-Program/blob/main/17list.c
 
 void test_find_smallest_inList(){
     test_equal_i(find_smallest_inList(prepend(3, prepend(5, prepend(-5, prepend(-3, prepend(-1, NULL)))))), -5);
@@ -227,7 +231,6 @@ void test_find_smallest_inList(){
 }
 
 //find max Product Sub Array in List
-// Source: https://www.geeksforgeeks.org/maximum-product-subarray/
 int find_max_multiple(Intlist* list){
 	//Viet lai
 	int max = list->value; //set max as first Node in List
@@ -252,50 +255,6 @@ void test_find_max_multiple(){
 	test_equal_i(find_max_multiple(prepend(0, prepend(-1, prepend(-2, prepend(-5, prepend(-1, prepend(1, prepend(0, NULL)))))))), 10); //1*1*2*5*1*3
 }
 
-//find Largest subarray with equal number of 0s and 1s
-//Source: https://www.geeksforgeeks.org/largest-subarray-with-equal-number-of-0s-and-1s/
-int max_subArray(Intlist* list){
-	
-	int max = 0;
-	for(Intlist* node = list; node != NULL; node = node->next){
-		int sum;
-		int temp_size = 0;
-		
-		//set if value = 1 sum = 1, else value = 0 sum = -1
-		if(node->value == 1){
-			sum = 1;
-			temp_size++;
-		}else{
-			sum = -1;
-			temp_size++;
-		}
-		
-		for(Intlist* n = node->next; n != NULL; n = n->next){
-			
-			if(n->value == 1){
-				sum += 1;
-				temp_size++;
-			}else{
-				sum += -1;
-				temp_size++;
-			}
-			//when 1s & 0s equal, take maximum between max and temp_size
-			if(sum == 0){
-				max = maxint(max, temp_size);
-			}
-		}
-	}
-	return max; 
-}
-void test_max_subArray(){
-    test_equal_i(max_subArray(prepend(0, prepend(0, prepend(0, prepend(0, prepend(1, NULL)))))), 2); 
-    test_equal_i(max_subArray(prepend(1, prepend(0, prepend(0, prepend(1, prepend(0, prepend(1, prepend(0, NULL)))))))), 6);
-    test_equal_i(max_subArray(prepend(0, prepend(0, prepend(1, prepend(0, prepend(0, prepend(1, prepend(1, NULL)))))))), 6);
-	test_equal_i(max_subArray(prepend(0, prepend(0, prepend(1, prepend(0, prepend(0, prepend(1, prepend(1, prepend(0, prepend(0, NULL)))))))))), 6);//0 0 1 0 0 1 1 0 0
-	test_equal_i(max_subArray(prepend(0, prepend(0, prepend(0, prepend(0, NULL))))), 0);
-	test_equal_i(max_subArray(prepend(1, prepend(1, prepend(1, prepend(1, prepend(1, NULL)))))), 0); 
-}
-
 int find_max_inList(Intlist* list){
 	
 	//set first element as max
@@ -311,7 +270,7 @@ void test_find_max_inList(){
     test_equal_i(find_max_inList(prepend(3, prepend(5, prepend(-5, prepend(-3, prepend(-1, NULL)))))), 5);
     test_equal_i(find_max_inList(prepend(3, prepend(-3, prepend(6, prepend(1, prepend(-1, prepend(-2, prepend(-10, NULL)))))))), 6);
     test_equal_i(find_max_inList(prepend(-3, prepend(-1, prepend(5, prepend(-3, prepend(-1, prepend(-4, prepend(2, NULL)))))))), 5);
-	test_equal_i(find_max_inList(prepend(1, prepend(1, prepend(2, prepend(5, prepend(1, prepend(3, prepend(-2, NULL)))))))), 5);
+    test_equal_i(find_max_inList(prepend(1, prepend(1, prepend(2, prepend(5, prepend(1, prepend(3, prepend(-2, NULL)))))))), 5);
 }
 
 int node_difference(Intlist* list){
@@ -332,9 +291,9 @@ void test_node_difference(){
     test_equal_i(node_difference(prepend(3, prepend(5, prepend(-5, prepend(-3, prepend(-1, NULL)))))), 10);
     test_equal_i(node_difference(prepend(3, prepend(-3, prepend(6, prepend(1, prepend(-1, prepend(-2, prepend(-10, NULL)))))))), 16);
     test_equal_i(node_difference(prepend(-3, prepend(-1, prepend(5, prepend(-3, prepend(-1, prepend(-4, prepend(2, NULL)))))))), 9);
-	test_equal_i(node_difference(prepend(1, prepend(1, prepend(2, prepend(5, prepend(1, prepend(3, prepend(-2, NULL)))))))), 7);
+    test_equal_i(node_difference(prepend(1, prepend(1, prepend(2, prepend(5, prepend(1, prepend(3, prepend(-2, NULL)))))))), 7);
 }
-
+//find Largest subarray with equal number of 0s and 1s
 int find_path_1_0(Intlist* list){
 
 	int length = 0;
@@ -378,7 +337,7 @@ void test_find_path_1_0(){
     test_equal_i(find_path_1_0(prepend(1, prepend(1, prepend(0, prepend(0, prepend(1, NULL)))))), 4);
     test_equal_i(find_path_1_0(prepend(0, prepend(0, prepend(1, prepend(1, prepend(1, prepend(0, prepend(0, NULL)))))))), 6);
     test_equal_i(find_path_1_0(prepend(1, prepend(1, prepend(1, prepend(0, prepend(1, prepend(0, prepend(1, NULL)))))))), 4);
-	test_equal_i(find_path_1_0(prepend(1, prepend(1, prepend(0, prepend(0, prepend(1, prepend(1, prepend(0, prepend(1, prepend(1, NULL)))))))))), 6);
+    test_equal_i(find_path_1_0(prepend(1, prepend(1, prepend(0, prepend(0, prepend(1, prepend(1, prepend(0, prepend(1, prepend(1, NULL)))))))))), 6);
 }
 int main(){
 	test_center_or_zero();
@@ -389,7 +348,6 @@ int main(){
 	test_find_min_subElements();
 	test_find_smallest_inList();
 	test_find_max_multiple();
-	test_max_subArray();
 	test_find_max_inList();
 	test_node_difference();
 	test_find_path_1_0();
